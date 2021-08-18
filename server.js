@@ -66,11 +66,11 @@ const bookSchema= new mongoose.Schema({
      console.log(murat)
  
  }
- 
 // seedBook();
+
+
 app.get("/books",(req,res)=>{
    let {email}=req.query
-   console.log(email);
   myOwnerBook.find({email:email},(error,data)=>{
     if(error){res.send("We Have something happen")}
     else{
@@ -80,13 +80,13 @@ app.get("/books",(req,res)=>{
   })
 
 })
-
+// post url
 app.post("/books-add",(req,res)=>{
-  console.log(req.body);
+  
   let {email,bookTitle,bookDescription,bookStatus}=req.body
 
   myOwnerBook.find({email:email},(error,data)=>{
-    console.log("a");
+  
     if(error){res.send("We Have something happen")}
     else{
       data[0].book.push({
@@ -101,6 +101,30 @@ app.post("/books-add",(req,res)=>{
   })
 
 })
+
+// delete url
+app.delete("/books-delete/:id",(req,res)=>{
+  let {email}=req.query;
+  let ind=Number(req.params.id);
+  myOwnerBook.find({email:email},(error,data)=>{
+  
+    if(error){res.send("We Have something happen")}
+    else{
+      
+     let newData = data[0].book.filter((item,index)=> ind!==index )
+       console.log(newData);
+         data[0].book=newData;
+         data[0].save()
+      res.json(data[0].book)
+    }
+
+  })
+})
+
+
+
+
+
 
 
 app.get("/test", (request, response) => {

@@ -1,5 +1,6 @@
 
 const myOwnerBook=require('../module/book.module');
+
 let booksArr=[
     {
         title: 'Java',
@@ -16,7 +17,8 @@ let booksArr=[
 ]
 let bookController=(req,res)=>{
     const book=booksArr.map(obj=>{
-        return new Book({
+        return new myOwnerBook({
+          
             title: obj.title,
             description: obj.description ,
             status: obj.status,
