@@ -124,9 +124,6 @@ app.delete("/books-delete/:id",(req,res)=>{
 
 
 
-
-
-
 app.get("/test", (request, response) => {
   // TODO:
   // STEP 1: get the jwt from the headers
